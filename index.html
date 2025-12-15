@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TucaTech | Full Responsive</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Roboto:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f2f2f2;
+            color: #111;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 60px 40px;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #3ddc97, #2ec78a, #3ddc97);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                background-position: 0% 0%;
+            }
+
+            50% {
+                background-position: 100% 0%;
+            }
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(28px, 5vw, 42px);
+            /* Fluid sizing */
+            font-weight: 800;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #0d1b2a 0%, #3ddc97 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 5px;
+            background: #3ddc97;
+            border-radius: 10px;
+        }
+
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            margin: 40px 0 20px;
+            color: #0d1b2a;
+        }
+
+        /* MENÜ */
+        .topmenu {
+            width: 100%;
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 2000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            /* Flexbox for layout */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Center everything */
+            gap: clamp(10px, 3vw, 40px);
+            /* Uniform gap between logo and all links */
+        }
+
+        .nav-links {
+            display: contents;
+            /* Removes this wrapper from layout flow */
+        }
+
+        .topmenu a {
+            color: white;
+            margin: 0;
+            font-weight: 600;
+            font-size: clamp(11px, 1.5vw, 16px);
+            /* Fluid size */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            padding: 8px 4px;
+            white-space: nowrap;
+        }
+
+        .topmenu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 100%;
+            height: 3px;
+            background: #3ddc97;
+            transition: transform 0.3s ease;
+        }
+
+        .topmenu a:hover::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        .topmenu a:hover {
+            color: #3ddc97;
+            text-shadow: 0 0 10px rgba(61, 220, 151, 0.5);
+        }
+
+        /* HEADER */
+        header {
+            margin-top: 90px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            height: 120px;
+        }
+
+        .logo {
+            /* Position relative to flex container */
+            position: relative;
+            top: auto;
+            left: auto;
+            z-index: 2500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+
+            /* Responsive sizing */
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+            /* Don't shrink below this */
+
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(61, 220, 151, 0.3);
+            background: #fff;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transform: scale(1.4);
+            /* Zoom content */
+            transition: transform 0.3s ease;
+        }
+
+        .site-title {
+            color: #0d1b2a;
+            font-size: 48px;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* HERO */
+        #hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            /* Added dark overlay to make image fainter/paler */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('image1.png') no-repeat center center;
+            background-size: cover;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(61, 220, 151, 0.1) 0%, transparent 70%);
+            animation: pulse 8s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.3;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: clamp(40px, 8vw, 82px);
+            /* Fluid sizing */
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 20px;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+            letter-spacing: 3px;
+        }
+
+        .hero-content p {
+            font-size: clamp(18px, 3vw, 26px);
+            /* Fluid sizing */
+            margin-bottom: 40px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* BUTON */
+        .btn {
+            background: linear-gradient(135deg, #3ddc97 0%, #2ec78a 100%);
+            color: #0d1b2a;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 20px rgba(61, 220, 151, 0.3);
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(61, 220, 151, 0.5);
+        }
+
+        /* KARTLAR */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 35px 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            font-weight: 600;
+            color: #0d1b2a;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(61, 220, 151, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(61, 220, 151, 0.2);
+            border-color: #3ddc97;
+        }
+
+        /* GALERİ */
+        /* GALERİ SLIDER */
+        .gallery-wrapper {
+            position: relative;
+            margin-top: 30px;
+        }
+
+        .gallery {
+            display: flex;
+            overflow-x: auto;
+            gap: 25px;
+            padding: 10px 5px;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            /* Hide scrollbar Firefox */
+        }
+
+        .gallery::-webkit-scrollbar {
+            display: none;
+            /* Hide scrollbar Chrome/Safari */
+        }
+
+        .gallery img {
+            width: 400px;
+            /* Fixed width for slider items */
+            height: 250px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            flex: 0 0 auto;
+            /* Prevent shrinking */
+        }
+
+        .gallery img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(61, 220, 151, 0.3);
+        }
+
+        .scroll-btn {
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #3ddc97 0%, #2ec78a 100%);
+            color: #0d1b2a;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 20;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 8px 25px rgba(61, 220, 151, 0.5);
+        }
+
+        /* TABLO */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 30px;
+            font-size: 16px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        table td,
+        table th {
+            padding: 18px 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table th {
+            background: linear-gradient(135deg, #3ddc97 0%, #2ec78a 100%);
+            color: #0d1b2a;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        table tr:hover {
+            background: rgba(61, 220, 151, 0.05);
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .video-box {
+            margin-top: 30px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-box iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
+        /* DARK MODE */
+        .dark {
+            background: #0b0f1a !important;
+            color: white !important;
+        }
+
+        .dark .container {
+            background: linear-gradient(135deg, #111827 0%, #1a1f35 100%);
+            color: white !important;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .dark .card {
+            background: linear-gradient(135deg, #1f2937 0%, #2a3447 100%);
+            color: white;
+        }
+
+        .dark .topmenu {
+            background: rgba(0, 0, 0, 0.95);
+        }
+
+        .dark table td,
+        .dark table th {
+            color: white;
+            border-color: #374151;
+        }
+
+        .dark table tr:hover {
+            background: rgba(61, 220, 151, 0.1);
+        }
+
+        .dark h2 {
+            background: linear-gradient(135deg, #3ddc97 0%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .dark h3 {
+            color: #3ddc97;
+        }
+
+        .dark .site-title {
+            color: #3ddc97 !important;
+        }
+
+        /* Dark Mode Button */
+        #darkToggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #3ddc97 0%, #2ec78a 100%);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 8px 25px rgba(61, 220, 151, 0.4);
+            z-index: 3000;
+            transition: all 0.3s ease;
+        }
+
+        #darkToggle:hover {
+            transform: scale(1.1) rotate(20deg);
+            box-shadow: 0 12px 35px rgba(61, 220, 151, 0.6);
+        }
+
+        /* İLETİŞİM */
+        .contact-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .contact-info,
+        .contact-form {
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, rgba(61, 220, 151, 0.1) 0%, rgba(61, 220, 151, 0.05) 100%);
+        }
+
+        .contact-form {
+            background: white;
+        }
+
+        .contact-info h3 {
+            color: #0d1b2a;
+            margin-bottom: 25px;
+        }
+
+        .contact-info p {
+            margin: 15px 0;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Class for long responsive text */
+        .responsive-text {
+            font-size: clamp(16px, 2vw, 18px);
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 16px;
+            margin: 12px 0;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        form input:focus,
+        form textarea:focus {
+            outline: none;
+            border-color: #3ddc97;
+            box-shadow: 0 0 0 4px rgba(61, 220, 151, 0.1);
+        }
+
+        .dark .contact-form {
+            background: #1f2937;
+        }
+
+        .dark .contact-info {
+            background: linear-gradient(135deg, rgba(61, 220, 151, 0.15) 0%, rgba(61, 220, 151, 0.05) 100%);
+        }
+
+        .dark .contact-info h3 {
+            color: #3ddc97;
+        }
+
+        .dark form input,
+        .dark form textarea {
+            background: #111827;
+            color: white;
+            border-color: #374151;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1e3a5f 100%);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .dark footer {
+            background: linear-gradient(135deg, #000000 0%, #0d1b2a 100%);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            /* Font sizes handled by clamp() in main rules
+            .hero-content h1 {
+                font-size: 48px;
+            }
+
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            h2 {
+                font-size: 32px;
+            }
+
+            .site-title {
+                font-size: 32px;
+            }
+            */
+
+            .contact-box {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 40px 25px;
+                margin: 40px 20px;
+            }
+
+            .topmenu {
+                padding: 10px;
+                justify-content: flex-start;
+                /* Or space-between if logo left, items right/wrap */
+            }
+
+            .logo {
+                width: 40px;
+                height: 40px;
+                margin-right: 10px;
+                position: static;
+                /* Override any desktop fixed/absolute if leaked */
+            }
+
+            /* .nav-links is display: contents, gap handled by topmenu */
+
+            .topmenu a {
+                margin: 0;
+                /* Font size handled by clamp() in main rule */
+                padding: 2px;
+                /* Minimize padding on very small screens */
+            }
+
+            .logo img {
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- DARK MODE BUTTON -->
+    <button id="darkToggle">🌙</button>
+
+    <!-- MENÜ -->
+    <!-- MENÜ -->
+    <div class="topmenu">
+        <div class="logo">
+            <img src="image.png" alt="Logo">
+        </div>
+        <div class="nav-links">
+            <a href="#hero">ANA SAYFA</a>
+            <a href="#about">HAKKIMIZDA</a>
+            <a href="#team">EKİP</a>
+            <a href="#projects">PROJELER</a>
+            <a href="#gallery">GALERİ</a>
+            <a href="#contact">İLETİŞİM</a>
+        </div>
+    </div>
+
+
+
+    <!-- HEADER REMOVED to remove space -->
+
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-content">
+            <h1>TucaTech</h1>
+            <p class="responsive-text" style="max-width: 1100px; margin: 0 auto 40px auto; line-height: 1.6;">TucaTech
+                olarak Atatürk
+                Üniversitesi Mühendislik Fakültesi bünyesinde teknoloji odaklı bir öğrenci topluluğuyuz. Savunma
+                teknolojileri ve otonom sistemler alanında yenilikçi projeler geliştiriyoruz. TEKNOFEST gibi ulusal
+                yarışmalarda ülkemizi temsil ediyoruz. Disiplinler arası işbirliğiyle hayallerimizi gerçeğe
+                dönüştürüyoruz.</p>
+
+            <a href="#projects" class="btn">Projelerimizi İncele</a>
+
+            <div style="margin-top:30px; display:flex; gap:20px; justify-content:center; flex-wrap: wrap;">
+                <a href="#hss" class="btn">HSS Projesi</a>
+                <a href="#ika" class="btn">İKA Projesi</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- HAKKIMIZDA -->
+    <section id="about" class="container">
+        <h2>HAKKIMIZDA</h2>
+        <p class="responsive-text">TucaTech, 2023 yılında Atatürk Üniversitesi
+            Mühendislik Fakültesi'nde teknolojiye tutkulu bir grup öğrenci tarafından kuruldu. Savunma sanayi, robotik
+            sistemler ve yapay zeka alanlarında özgün projeler geliştiren takımımız, mekanik, elektronik, yazılım ve
+            endüstri mühendisliği disiplinlerinden öğrencileri bir araya getiriyor. TEKNOFEST yarışmalarında İnsansız
+            Kara Aracı ve Hava Savunma Sistemi kategorilerinde mücadele ederken, teorik bilgiyi pratiğe dönüştürme
+            fırsatı buluyoruz. Sadece yarışmak değil, aynı zamanda ülkemizin teknolojik bağımsızlığına katkı sağlamak ve
+            genç mühendislere ilham vermek misyonumuzdur. Erzurum'un soğuk ikliminden, sıcak fikirler ve cesur projeler
+            çıkararak, Türkiye'nin savunma teknolojileri alanında söz sahibi genç beyinlerinden biri olmayı
+            hedefliyoruz.</p>
+    </section>
+
+    <!-- EKİP -->
+    <section id="team" class="container">
+        <h2>EKİP ÜYELERİ</h2>
+        <div class="card-container">
+            <div class="card">TAKIM KAPTANI / MEKANİK <br><br> CABİR BOZTAŞ</div>
+            <div class="card">WEB TASARIM / ARAYÜZ <br><br> ÖMER KALAOĞLU <br>MUHAMMED DURMUŞ</div>
+            <div class="card">ELEKTRONİK <br><br> MEHMET DEMİR <br> ABDULSAMET KAPLAN</div>
+            <div class="card">MEKANİK TASARIM <br><br> İBRAHİM ÇAĞRI KALAOĞLU</div>
+            <div class="card">YAZILIM <br><br> DİLAN OLTAN<br>BAHA TÜRK</div>
+        </div>
+    </section>
+
+    <!-- PROJELER -->
+    <section id="projects" class="container">
+        <h2>PROJELERİMİZ</h2>
+        <div class="card-container">
+            <a href="#hss" class="card">HAVA SAVUNMA SİSTEMİ (HSS)</a>
+            <a href="#ika" class="card">İNSANSIZ KARA ARACI (İKA)</a>
+        </div>
+    </section>
+
+    <!-- HSS TAM ÖZELLİKLER BÖLÜMÜ -->
+    <section id="hss" class="container">
+        <h2>HAVA SAVUNMA SİSTEMİ (HSS)</h2>
+
+        <p class="responsive-text">
+            HSS (Hava Savunma Sistemi), otomatik hedef algılama, takip ve durdurma
+            yeteneklerine sahip modern bir savunma platformudur.
+        </p>
+
+        <h3>📸 FOTOĞRAF GALERİSİ</h3>
+        <div class="gallery-wrapper">
+            <div class="gallery">
+                <img src="HSS1.png" alt="HSS 1">
+                <img src="HSS2.png" alt="HSS 2">
+                <img src="HSS3.png" alt="HSS 3">
+                <img src="HSS4.png" alt="HSS 4">
+                <img src="HSS5.png" alt="HSS 5">
+            </div>
+            <button class="scroll-btn" onclick="scrollGallery(this)">&#10095;</button>
+        </div>
+
+        <h3>⚙️ TEKNİK ÖZELLİKLER</h3>
+        <table>
+            <tr>
+                <th>ÖZELLİK</th>
+                <th>DEĞER</th>
+            </tr>
+            <tr>
+                <td>Menzil</td>
+                <td>10 m</td>
+            </tr>
+            <tr>
+                <td>Hedef Takip</td>
+                <td>Radar + Görüntü İşleme</td>
+            </tr>
+            <tr>
+                <td>Ateşleme</td>
+                <td>Yarı otomatik</td>
+            </tr>
+            <tr>
+                <td>Enerji</td>
+                <td>220VAC Lityum Batarya</td>
+            </tr>
+            <tr>
+                <td>Kontrol</td>
+                <td>Manuel + Yarı Otonom + Otonom + Yer Kontrol</td>
+            </tr>
+        </table>
+
+        <h3>🎬 TANITIM VİDEOSU</h3>
+        <div class="video-box">
+            <video width="100%" controls>
+                <source src="HSS-Tanıtım Videosu.mp4" type="video/mp4">
+                Tarayıcınız video etiketini desteklemiyor.
+            </video>
+        </div>
+    </section>
+
+    <!-- İKA TAM ÖZELLİKLER BÖLÜMÜ -->
+    <section id="ika" class="container">
+        <h2>İNSANSIZ KARA ARACI (İKA)</h2>
+
+        <p class="responsive-text">
+            İKA, zorlu arazi koşullarında görev yapabilen, otonom navigasyon yeteneklerine sahip çok amaçlı bir kara
+            aracıdır.
+        </p>
+
+
+
+        <h3>⚙️ TEKNİK ÖZELLİKLER</h3>
+        <table>
+            <tr>
+                <th>ÖZELLİK</th>
+                <th>DEĞER</th>
+            </tr>
+            <tr>
+                <td>Azami Hız</td>
+                <td>18 km/h</td>
+            </tr>
+            <tr>
+                <td>Sürücü Sistemi</td>
+                <td>Diferansiyel Motor Kontrolü</td>
+            </tr>
+            <tr>
+                <td>Sensörler</td>
+                <td>Kamera + LIDAR + Ultrasonik</td>
+            </tr>
+            <tr>
+                <td>Görev Süresi</td>
+                <td>Verilen her parkur görevinde en fazla 15 dk</td>
+            </tr>
+            <tr>
+                <td>Kontrol</td>
+                <td>Otonom + RC Kontrol</td>
+            </tr>
+        </table>
+
+
+    </section>
+
+
+    <!-- İLETİŞİM -->
+    <section id="contact" class="container">
+        <h2>İLETİŞİM</h2>
+
+        <div class="contact-box">
+
+            <div class="contact-info">
+                <h3>BİZE ULAŞIN</h3>
+                <p><b>📧 Email:</b> <a href="mailto:tucatechnology@gmail.com"
+                        style="color: inherit; text-decoration: none;">tucatechnology@gmail.com</a></p>
+                <p><b>📱 Telefon:</b> <a href="tel:+905537591352" style="color: inherit; text-decoration: none;">+90 553
+                        759 1352</a></p>
+                <p><b>📍 Konum:</b> ATATÜRK ÜNİVERSİTESİ MÜHENDİSLİK FAKÜLTESİ MERKEZ KAMPÜSÜ, YAKUTİYE/ERZURUM, TÜRKİYE
+                </p>
+
+                <br>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdLWLtC539wqFc0xQM91jlFI7oF5VZ9J61llZczkX6Ooh7lzA/viewform"
+                    target="_blank" class="btn">📝 Takım Başvuru Formu</a>
+            </div>
+
+            <div class="contact-form">
+                <form action="mail-gonder.php" method="post">
+                    <input type="text" name="isim" placeholder="Ad Soyad" required>
+                    <input type="email" name="email" placeholder="E-posta" required>
+                    <textarea name="mesaj" rows="6" placeholder="Mesajınız" required></textarea>
+                    <button type="submit" class="btn">Gönder</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>© 2025 TucaTech – Tüm Hakları Saklıdır</footer>
+
+    <script>
+        /* DARK MODE */
+        const darkBtn = document.getElementById("darkToggle");
+        const savedTheme = localStorage.getItem('theme');
+
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark');
+            darkBtn.textContent = "☀️";
+        }
+
+        darkBtn.addEventListener("click", () => {
+            document.body.classList.toggle("dark");
+            const isDark = document.body.classList.contains("dark");
+            darkBtn.textContent = isDark ? "☀️" : "🌙";
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        /* SMOOTH SCROLL */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        /* SCROLL ANIMATION */
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.container').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        /* GALLERY SCROLL */
+        function scrollGallery(btn) {
+            const gallery = btn.previousElementSibling;
+            gallery.scrollBy({
+                left: 300,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+
+</body>
+
+</html>
